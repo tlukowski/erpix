@@ -6,7 +6,7 @@ export async function GET() {
   const CATEGORY_ID = 79;
 
   const apiUrl = new URL(`${BASE_URL}products`);
-  apiUrl.searchParams.set("display", "full");
+  apiUrl.searchParams.set("display", "[id,name,price,visibility,id_default_image,product_features[id], product_features[id_feature_value]]");
   apiUrl.searchParams.set("filter[id_category_default]", `[${CATEGORY_ID}]`);
   apiUrl.searchParams.set("output_format", "JSON");
 
@@ -21,8 +21,7 @@ export async function GET() {
     if (!res.ok) throw new Error(`Błąd API: ${res.status} ${res.statusText}`);
 
     const jsonData = await res.json();
-
-    // Pełne dane produktów dla frontend
+  
     const products = jsonData.products?.map((product) => ({
       id: product.id,
       name: product.name,
@@ -32,7 +31,7 @@ export async function GET() {
       image_url: `${BASE_URL}images/products/${product.id}/${product.id_default_image}`,
     })) || [];
 
-    return NextResponse.json({ products }, { status: 200 });
+    return NextResponse.json(products, { status: 200 });
 
   } catch (error) {
     return NextResponse.json({ error: "Nie udało się pobrać produktów", details: error.message }, { status: 500 });

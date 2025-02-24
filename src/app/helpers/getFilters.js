@@ -1,6 +1,6 @@
-export async function getProducts() {
+export async function getFilters() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/productsfeatures`);
 
     if (!res.ok) {
       throw new Error(`Błąd pobierania produktów: ${res.status} ${res.statusText}`);

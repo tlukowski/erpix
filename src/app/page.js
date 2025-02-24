@@ -3,9 +3,12 @@ import Faq from "./components/Faq";
 import { HeroBanner } from "./components/HeroBanner";
 import {HeroForm} from "./components/HeroForm";
 import { HeroBanner2 } from "./components/HeroBanner2";
-import { ProductList } from "./components/ProductList";
 import { getProducts } from "./helpers/getProducts";
-import ProductFilter from "./components/ProductFilter";
+import { getFilters } from "./helpers/getFilters";
+import {ProductFilter} from "./components/products/ProductFilter";
+import ExitPopup from "./components/ExitPopup";
+import ContactModal from "./components/forms/ContactModal";
+import { ModalProvider } from "./context/ModalContext"; 
 const faqItems = [
   {
     id: 1,
@@ -33,17 +36,23 @@ const faqItems = [
     description: "Nie trzymaj na stałe urządzenia podłączonego do ładowarki i nie przekraczaj maksymalnego czasu ładowania, bo może to obniżyć żywotność akumulatora. Rozładowany akumulator podłącz do ładowarki na 14 godzin. Jeżeli po tym czasie, urządzenie nadal słabo pracuje, bądź w krótkim czasie się rozładowuje, odwiedź nasz najbliższy punkt serwisowy lub skontaktuj się z Biurem Obsługi Klienta."
   },
 ]
+export const dynamic = "force-dynamic";
 
 export default async function Home() { 
-  // const products = await getProducts();
+  
+  const products = await getProducts();
+  const filters = await getFilters();  
   return (
     <Layout>
-      <HeroBanner/>
-      <HeroForm/>
-      <HeroBanner2/>
-      {/* <ProductList products={products.products}/> */}
-      {/* <ProductFilter /> */}
-      <Faq items={faqItems} />
+      <ModalProvider>
+        <HeroBanner/>
+        <HeroForm/>
+        <HeroBanner2/>
+        <ProductFilter filters={filters} products={products} />
+        <Faq items={faqItems} />
+        <ContactModal isOpen={true}/>
+      </ModalProvider>
+      <ExitPopup/>
     </Layout>
   );
 }
