@@ -35,6 +35,11 @@ const faqItems = [
     title: "Co zrobić gdy akumulator szybko się rozładowuje?",
     description: "Nie trzymaj na stałe urządzenia podłączonego do ładowarki i nie przekraczaj maksymalnego czasu ładowania, bo może to obniżyć żywotność akumulatora. Rozładowany akumulator podłącz do ładowarki na 14 godzin. Jeżeli po tym czasie, urządzenie nadal słabo pracuje, bądź w krótkim czasie się rozładowuje, odwiedź nasz najbliższy punkt serwisowy lub skontaktuj się z Biurem Obsługi Klienta."
   },
+  {
+    id: 6,
+    title: "Co zrobić gdy akumulator szybko się rozładowuje?",
+    description: "Nie trzymaj na stałe urządzenia podłączonego do ładowarki i nie przekraczaj maksymalnego czasu ładowania, bo może to obniżyć żywotność akumulatora. Rozładowany akumulator podłącz do ładowarki na 14 godzin. Jeżeli po tym czasie, urządzenie nadal słabo pracuje, bądź w krótkim czasie się rozładowuje, odwiedź nasz najbliższy punkt serwisowy lub skontaktuj się z Biurem Obsługi Klienta."
+  },
 ]
 export const dynamic = "force-dynamic";
 
