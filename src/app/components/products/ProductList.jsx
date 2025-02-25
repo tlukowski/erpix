@@ -1,10 +1,9 @@
-import {useState} from "react";
 import ProductCard from "./ProductCard.jsx";
 
 const ProductList = ({ products }) => {
   
   return (
-    <section className="relative mt-6 lg:mt-12">
+    <section id="productList" className="relative mt-6 lg:mt-12 scroll-mt-36">
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 gap-4 sm:gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {products.length > 0 &&

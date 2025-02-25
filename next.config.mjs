@@ -5,12 +5,8 @@ const nextConfig = {
         remotePatterns: [
             {
               protocol: "https",
-              hostname: "dev.erpixkarcher24.pl",
-            },
-            {
-              protocol: "https",
-              hostname: "video.kaercher-media.com",
-            },
+              hostname: "erpixkarcher24.pl",
+            },            
             {
               protocol: "http",
               hostname: "localhost",

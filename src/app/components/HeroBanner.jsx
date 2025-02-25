@@ -3,7 +3,6 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "motion/react"
 import { containerVariants,itemVariants } from "../helpers/framerMotionAnimations";
-
 export const HeroBanner = () => {
   return (
     <section className="relative mt-32 md:mt-24 bg-primary py-8 lg:py-12 px-4">
@@ -12,12 +11,13 @@ export const HeroBanner = () => {
         initial="hidden" className="flex flex-col lg:grid gap-8 lg:gap-4 lg:grid-cols-2 container mx-auto items-center h-full">
         <div className="lg:py-3 order-1 w-full text-center lg:text-left">
           <motion.h1  variants={itemVariants} className="text-xl md:text-3xl lg:text-6xl font-bold uppercase">
-            Odkurzacze przemysłowe i budowlane
+            Odkurzacze przemysłowe Kärcher
           </motion.h1>
           <motion.p variants={itemVariants} className="text-lg md:text-xl lg:text-4xl font-bold uppercase mt-2 lg:mt-4">
-            Skorzystaj z naszej oferty
+          niezawodność, wydajność i profesjonalne wsparcie
           </motion.p>
-          <motion.button variants={itemVariants} className="btn-secondary mt-4 lg:mt-8">
+          <motion.p variants={itemVariants} className="mt-4 text-2xl"> Dzięki zaawansowanej technologii i wysokiej jakości wykonania urządzenia Kärcher gwarantują bezpieczeństwo oraz maksymalną wydajność pracy.</motion.p>
+          <motion.button onClick={() => document.getElementById("learnMore").scrollIntoView({ behavior: "smooth" })} variants={itemVariants} className="btn-secondary mt-4 lg:mt-8">
             Dowiedz się więcej
           </motion.button>
         </div>

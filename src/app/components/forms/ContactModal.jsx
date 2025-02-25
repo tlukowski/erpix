@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { useModal } from "../../context/ModalContext";
 
 const ContactModal = () => {
-  const { isModalOpen, closeModal } = useModal(); // Pobieramy wartości z kontekstu
+  const { isModalOpen, closeModal } = useModal();
 
   const formik = useFormik({
     initialValues: {

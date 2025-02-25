@@ -3,12 +3,13 @@ import Faq from "./components/Faq";
 import { HeroBanner } from "./components/HeroBanner";
 import {HeroForm} from "./components/HeroForm";
 import { HeroBanner2 } from "./components/HeroBanner2";
-import { getProducts } from "./helpers/getProducts";
-import { getFilters } from "./helpers/getFilters";
 import {ProductFilter} from "./components/products/ProductFilter";
 import ExitPopup from "./components/ExitPopup";
 import ContactModal from "./components/forms/ContactModal";
 import { ModalProvider } from "./context/ModalContext"; 
+import { getProducts } from "../lib/api";
+import { getFilters } from "../lib/api";
+import LearnMore from "./components/LearnMore";
 const faqItems = [
   {
     id: 1,
@@ -53,11 +54,12 @@ export default async function Home() {
         <HeroBanner/>
         <HeroForm/>
         <HeroBanner2/>
+        <LearnMore/>
         <ProductFilter filters={filters} products={products} />
         <Faq items={faqItems} />
         <ContactModal isOpen={true}/>
+        <ExitPopup/>
       </ModalProvider>
-      <ExitPopup/>
     </Layout>
   );
 }

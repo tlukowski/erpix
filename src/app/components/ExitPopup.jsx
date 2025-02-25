@@ -1,31 +1,47 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+import { useModal } from "../context/ModalContext";
 const ExitPopup = () => {
+  const { openModal } = useModal();
   const [isVisible, setIsVisible] = useState(false);
+  const [hasTriggered, setHasTriggered] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined") return; // Zapobiega problemom SSR
+    if (typeof window === "undefined") return;
+    if (hasTriggered) return;
 
-    const handleMouseLeave = (event) => {
-      if (event.clientY <= 0) {
+    const handleMouseOut = (event) => {
+      if (event.relatedTarget === null) {
         setIsVisible(true);
+        setHasTriggered(true);
+        removeListeners();
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        setIsVisible(true);
+        setHasTriggered(true);
+        removeListeners();
       }
     };
 
     const enableListeners = () => {
-      document.addEventListener("mouseleave", handleMouseLeave);
+      document.addEventListener("mouseout", handleMouseOut);
+      document.addEventListener("visibilitychange", handleVisibilityChange);
     };
 
-    // W Next.js 15 eventy czasem działają dopiero po pierwszej interakcji użytkownika
-    window.addEventListener("mousemove", enableListeners, { once: true });
-
-    return () => {
-      document.removeEventListener("mouseleave", handleMouseLeave);
+    const removeListeners = () => {
+      document.removeEventListener("mouseout", handleMouseOut);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("mousemove", enableListeners);
     };
-  }, []);
+
+    window.addEventListener("mousemove", enableListeners, { once: true });
+
+    return removeListeners;
+  }, [hasTriggered]);
 
   const closePopup = () => {
     setIsVisible(false);
@@ -34,16 +50,24 @@ const ExitPopup = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white w-full max-w-md p-6 rounded-lg shadow-lg text-center">
-        <h2 className="text-xl font-bold">Nie odchodź jeszcze!</h2>
-        <p className="mt-2">Zarejestruj się teraz i odbierz 10% rabatu na pierwsze zamówienie!</p>
-        <button
-          className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+    <div className="fixed bottom-0 w-full  flex justify-center items-center z-10">
+      <div className="bg-gray-100 shadow-2xl w-full max-w-full p-6 rounded-lg text-center">
+        <div>
+          <h2 className="text-xl font-bold">Potrzebuje pomocy z wyborem?</h2>
+          <p className="mt-2">Zadzwoń lub zostaw kontakt!</p>
+          <button
+            onClick={openModal}
+            className="mt-4 bg-secondary hover:bg-black transition-colors text-white px-4 py-2 rounded mr-2"
+          >
+            Zostaw kontakt
+          </button>
+          <button
+          className="mt-4 bg-blue-500 transition-colors text-white px-4 py-2 rounded hover:bg-blue-600"
           onClick={closePopup}
         >
           Zamknij
         </button>
+        </div>
       </div>
     </div>
   );
